@@ -1,6 +1,6 @@
 {
   "name": "great-lakes",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a module to collect the utilities I am using to scrape data.",
   "main": "index.js",
   "scripts": {

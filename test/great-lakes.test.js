@@ -6,7 +6,8 @@ var {
   construct,
   requireJSON,
   alphabetize,
-  get
+  get,
+  sway
 } = require(path.join(__dirname, '..'));
 
 describe('GreatLakes', () => {
@@ -29,6 +30,33 @@ describe('GreatLakes', () => {
       var sorted = alphabetize({z: 1, g: {z: 1, a: 3}, a: 0});
       assert.equal(Object.keys(sorted.g)[1], 'z');
       assert.equal(Object.keys(sorted)[0], 'a');
+    });
+  });
+
+  describe('sway', function() {
+    
+    // i don't know if this is the best way to collect the value for the key.
+    it('should identify noTag', function() {
+      var transitions = [
+	{
+	  "name": "findNoTag",
+	  "trigger": {
+	    "type": "noTag"
+	  },
+	  "action": "next_key"
+	}
+      ]
+
+      var modulator = sway(transitions);
+      
+      var modulations = modulator('state', 'test') ;
+      assert.equal(modulations.length, 1);
+      
+      var modulations = modulator('state', '<test') ;
+      assert.equal(modulations.length, 0);
+     
+      var modulations = modulator('state', 'test>') ;
+      assert.equal(modulations.length, 0);
     });
   });
 

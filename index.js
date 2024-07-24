@@ -171,6 +171,13 @@ function sway(transitions) {
 
     var array = relevant.filter((transition) => { 
       switch(transition.trigger.type) {
+	// not sure if this is the best way to identify a row with no tag.
+	case 'noTag':
+	  var matrix = ['<', '>'].map((char) => { 
+	    return line.indexOf(char) == -1; 
+	  });
+
+	  return matrix.indexOf(false) == -1;
 	case 'endsWith':
 	  return new RegExp(transition.trigger.value+"^").test(line);
 	case 'contains':
