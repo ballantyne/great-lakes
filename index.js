@@ -224,6 +224,7 @@ module.exports.extract = extract;
 
 function fingerprint(namespace, string) {
   if (typeof string != 'string') {
+    var sorted  = alphabetize(string);
     string = JSON.stringify(sorted);
   }
 
