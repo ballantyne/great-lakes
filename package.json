@@ -1,0 +1,28 @@
+{
+  "name": "great-lakes",
+  "version": "1.0.0",
+  "description": "a module to collect the utilities I am using to scrape data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --extension json --extension js -w test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ballantyne/great-lakes.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "Scott Ballantyne'",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ballantyne/great-lakes/issues"
+  },
+  "homepage": "https://github.com/ballantyne/great-lakes#readme",
+  "devDependencies": {
+    "mocha": "^10.7.0"
+  },
+  "dependencies": {
+    "cache-rules-everything-around-me": "^1.0.0"
+  }
+}

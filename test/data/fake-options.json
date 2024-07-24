@@ -1,0 +1,8 @@
+{
+  "default": {
+    "test": true
+  },
+  "another": {
+    "notTest": false
+  }
+}
