@@ -1,3 +1,3 @@
-# GreatLakes
+# great-lakes
 
 

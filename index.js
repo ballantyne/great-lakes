@@ -32,6 +32,10 @@ module.exports.isJSON = isJSON;
 
 
 
+
+
+
+
 function readJSON(file) {
   var data   = fs.readFileSync(file);
   var string = data.toString();
@@ -55,6 +59,10 @@ module.exports.readJSON = readJSON;
 
 
 
+
+
+
+
 function requireJSON(file) {
   if (process.env.NODE_ENV == 'production') {
     return require(file)
@@ -63,6 +71,10 @@ function requireJSON(file) {
   }
 }
 module.exports.requireJSON = requireJSON;
+
+
+
+
 
 
 
@@ -250,6 +262,11 @@ module.exports.fingerprint = fingerprint;
 
 
 
+
+
+
+
+
 function ignorant(rules) {
   return function ignorance(line) {
 
@@ -270,6 +287,12 @@ function ignorant(rules) {
   }
 }
 module.exports.ignorant = ignorant;
+
+
+
+
+
+
 
 
 
@@ -298,6 +321,9 @@ module.exports.merge = merge;
 
 
 
+
+
+
 function alphabetize(toSort) {
   return Object.keys(toSort).sort().reduce((obj, key) => {
     if (typeof toSort[key] == 'object' && toSort[key] instanceof Object) {
@@ -309,6 +335,129 @@ function alphabetize(toSort) {
   }, {})
 }
 module.exports.alphabetize = alphabetize;
+
+
+
+
+
+
+
+
+
+
+
+function metastasize(data, config, meta) {
+  var results;
+  
+  if (config.meta) {
+    results = {};
+    results.meta = meta;
+    results.data = data
+  } else {
+    results = data;
+  }
+
+  return results;
+} 
+module.exports.metastasize = metastasize;
+
+
+
+
+
+
+
+
+
+
+function deglyph(text) {
+  return text.replace('&#39;', "'").replace('&ndash;', '-').replace('&amp;', '&').replace('&nbsp;', ' ')
+}
+module.exports.deglyph = deglyph;
+
+
+
+
+
+
+
+
+
+
+
+function restack(html, options={}) {
+  if (options.split == undefined) {
+    options.split = false
+  }
+
+
+  var array = html.split('').reduce((array, char) => {
+    if (char == '<') {
+      array.push('\n')
+    }
+
+    array.push(char);
+    
+    if (char == '>') {
+      array.push('\n')
+    }
+    
+    return array;
+  }, [])
+
+  // filter out extras and trim;
+  array = array.join('').split('\n').filter((line) => { 
+    return line != ''; 
+  }).map((line) => { 
+    return line.trim(); 
+  })
+  
+  if (options.split) {
+    return array;
+  } else {
+    return array.join('\n');
+  }
+}
+
+module.exports.restack = restack;
+
+
+
+
+
+
+
+
+
+
+function logger(options={}) {
+  
+  if (options.ignore == undefined) {
+    options.ignore = []
+  }
+
+  if (options.verbose && options.ignore.indexOf(options.state) == -1) {
+    console.log('.......................................................')
+    if (typeof options.line == 'string') {
+      console.log(options.index, options.state, options.line);
+    } else {
+      console.log(...options.line)
+    }
+
+    if (options.modulations.length > 0) {
+      console.log('.......................................................')
+      console.log('modulations');
+      console.log('.......................................................')
+      console.log(options.modulations);
+    }
+  }
+
+}
+module.exports.logger = logger;
+
+
+
+
 
 
 
