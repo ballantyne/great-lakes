@@ -5,6 +5,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 var {
+  cp,
   construct,
   requireJSON,
   alphabetize,
@@ -27,6 +28,22 @@ describe('GreatLakes', () => {
 
 
   });
+
+
+  describe('structuredClone', () => {
+
+    it('this is meant to replace JSON.parse, JSON.stringify', (done) => {
+      var options = requireJSON(path.join(__dirname, 'data', 'fake-options'));
+      var copiedOptions = cp(options);
+
+      //console.log('not the same',options !== copiedOptions);
+
+      assert.deepEqual(options, copiedOptions);
+
+      done();
+    });
+  });
+
 
   describe('constructObject', () => {
 

@@ -127,8 +127,8 @@ module.exports.prepare = prepare;
 
 
 
-function cp(options={}) {
-  return JSON.parse(JSON.stringify(options));
+function cp(obj={}) {
+  return structuredClone(obj);
 }
 module.exports.cp = cp;
 
